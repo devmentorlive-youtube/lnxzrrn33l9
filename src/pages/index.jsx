@@ -9,14 +9,13 @@ import {
   format,
 } from "date-fns";
 
-import { takeWeek } from "@/modules/calendar";
+import { takeMonth } from "@/modules/calendar";
 
 function buildMonth(date) {
   const startDate = startOfWeek(startOfMonth(date));
   const endDate = subDays(endOfWeek(endOfMonth(date)), 1);
 
-  const g = takeWeek(date);
-  return [g(), g()];
+  return takeMonth(date)();
 }
 
 export default function Homepage() {
@@ -46,7 +45,7 @@ export default function Homepage() {
             ))}
           </div>
 
-          <div className="flex items-center w-full justify-center font-light">
+          <div className="flex flex-col items-center w-full justify-center font-light">
             {month.map((week) => (
               <div className="flex items-center w-full justify-center font-medium">
                 {week.map((day) => (
