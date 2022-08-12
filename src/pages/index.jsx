@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   startOfMonth,
   endOfMonth,
@@ -21,10 +21,15 @@ function buildMonth(date) {
 
 export default function Homepage() {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [month, setMonth] = useState([]);
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-  return JSON.stringify(buildMonth(selectedDate));
-  //const month = ;
+  useEffect(() => {
+    // MUST be in a useEffect because of NextJS
+    // although the pattern forced is actually
+    // good React, anyway
+    setMonth(buildMonth(selectedDate));
+  }, []);
 
   return (
     <div className="w-full md:p-4 lg:w-1/2 mx-auto lg:mt-4">
